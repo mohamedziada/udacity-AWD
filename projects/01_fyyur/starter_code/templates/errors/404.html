@@ -1,6 +1,9 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
-  <h1>Sorry ...</h1>
-  <p>There's nothing here!</p>
-  <p><a href="{{url_for('index')}}">Back</a></p>
+    <h1><i class="fas fa-volume-off"></i> Sorry ...</h1>
+    <h2 class="text-black font-black">404</h2>
+    <p>There's nothing here!</p>
+
+
+    <p><a href="{{ url_for('index') }}">Back</a></p>
 {% endblock %}

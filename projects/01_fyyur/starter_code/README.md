@@ -179,3 +179,18 @@ python3 app.py
 6. **Verify on the Browser**<br>
 Navigate to project homepage [http://127.0.0.1:5000/](http://127.0.0.1:5000/) or [http://localhost:5000](http://localhost:5000) 
 
+
+# my Steps
+### Flask-Migrate
+* create new DB ```fyyur```
+* add ```from flask_migrate import Migrate, MigrateCommand```
+* run ```flask db init```
+* run ```flask db migrate -m "Initial migration"```
+* run ```flask db upgrade``` for upgrade the Database with tables or the migration version  
+### Seed
+* add ```from flask.cli import with_appcontext```
+* add function 
+Requirements Python 3.6+
+https://olirice.github.io/alembic_utils/quickstart/#installation
+pip3 install alembic_utils
+ 

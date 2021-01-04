@@ -8,13 +8,13 @@ from flask import Flask, render_template, request, Response, flash, redirect, ur
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, MigrateCommand
-from models import Venue, Artist, Show
 from logging import Formatter, FileHandler
 from flask_wtf import Form
 from forms import *
 from sqlalchemy import func
 import sys
 import forgery_py
+
 
 # ----------------------------------------------------------------------------#
 # App Config.
@@ -24,6 +24,7 @@ moment = Moment(app)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 # done: connect to a local postgresql database
+from models import Venue, Artist, Show
 migrate = Migrate(app, db)
 
 
@@ -755,10 +756,3 @@ def seed():
 # Default port:
 if __name__ == '__main__':
     app.run()
-
-# Or specify port manually:
-'''
-if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
-'''

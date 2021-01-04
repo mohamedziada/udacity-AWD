@@ -181,12 +181,21 @@ Navigate to project homepage [http://127.0.0.1:5000/](http://127.0.0.1:5000/) or
 
 
 # my Steps
+```
+pip install virtualenv
+pip install SQLAlchemy
+pip install postgres
+pip install Flask
+pip install Flask-Migrate
+```
 ### Flask-Migrate
 * create new DB ```fyyur```
 * add ```from flask_migrate import Migrate, MigrateCommand```
 * run ```flask db init```
 * run ```flask db migrate -m "Initial migration"```
 * run ```flask db upgrade``` for upgrade the Database with tables or the migration version  
+* run ```python3 -m virtualenv env```
+
 ### Seed
 * add ```from flask.cli import with_appcontext```
 * add function 

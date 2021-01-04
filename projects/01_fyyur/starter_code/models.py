@@ -1,16 +1,7 @@
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask_moment import Moment
-
-
-# ----------------------------------------------------------------------------#
-# Models.
-# Database Model name is singular and Table name is Plural
-# ----------------------------------------------------------------------------#
-db = SQLAlchemy()
+from app import db, app
 
 
 # Create Venue table

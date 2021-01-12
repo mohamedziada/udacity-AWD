@@ -115,7 +115,7 @@ COPY public.categories (id, type) FROM stdin;
 3	Geography
 4	History
 5	Entertainment
-6	Sports
+    6	Sports
 \.
 
 

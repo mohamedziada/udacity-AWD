@@ -1,7 +1,8 @@
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
-from app import db, app
+# from app import db
+db = SQLAlchemy()
 
 
 # Create Venue table

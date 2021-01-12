@@ -27,8 +27,7 @@ def create_app(test_config=None):
     @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after completing the TODOs
     '''
     # resources = {r'*/api/*': {'origins': '*'}}
-    # CORS(app)
-    CORS(app, resources={'*': {'origins': '*'}})
+    CORS(app)
 
     '''
     @TODO: Use the after_request decorator to set Access-Control-Allow
@@ -36,12 +35,19 @@ def create_app(test_config=None):
 
     @app.after_request
     def after_request(response):
-        response.headers.add(
-            'Access-Control-Allow-Headers',
-            'Content-Type,Authorization,true')
-        response.headers.add(
-            'Access-Control-Allow-Methods',
-            'GET,PATCH,POST,DELETE,OPTIONS')
+        origin = request.headers.get('Origin')
+        if request.method == 'OPTIONS':
+            response.headers.add('Access-Control-Allow-Credentials', 'true')
+            response.headers.add('Access-Control-Allow-Headers', 'Content-Type')
+            response.headers.add('Access-Control-Allow-Headers', 'x-csrf-token')
+            response.headers.add('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+            if origin:
+                response.headers.add('Access-Control-Allow-Origin', origin)
+        else:
+            response.headers.add('Access-Control-Allow-Credentials', 'true')
+            if origin:
+                response.headers.add('Access-Control-Allow-Origin', origin)
+
         return response
 
     '''
@@ -161,7 +167,8 @@ def create_app(test_config=None):
     only question that include that string within their question. 
     Try using the word "title" to start. 
     '''
-    @app.route("/questions", methods=["POST"])
+
+    @app.route("/questions", methods=['POST', 'OPTIONS'])
     def create_or_search():
         body = request.get_json()
         search_term = ''
@@ -194,7 +201,6 @@ def create_app(test_config=None):
 
             except Exception as e:
                 abort(422)
-
 
     '''
     @TODO: 

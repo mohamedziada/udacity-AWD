@@ -174,6 +174,7 @@ def create_app(test_config=None):
         search_term = ''
         if 'searchTerm' in body and body['searchTerm'] != '':
             # search request
+            search_term = body['searchTerm']
             questions = Question.query.filter(Question.question.ilike(f'%{search_term}%')).all()
             all_questions = create_pagination(request, questions)
             # all categories
@@ -210,6 +211,26 @@ def create_app(test_config=None):
     categories in the left column will cause only questions of that 
     category to be shown. 
     '''
+    @app.route('/categories/<int:category_id>/questions')
+    def get_questions_based_category(category_id):
+        category = Category.query.filter( Category.id == category_id).one_or_none()
+        if category is None:
+            abort(400)
+
+        questions = Question.query.filter(Question.category == category_id).all()
+
+        if questions is None:
+            abort(400)
+
+        current_questions = create_pagination(request, questions)
+
+        # return data to view
+        return jsonify({
+            'success': True,
+            'questions': current_questions,
+            'total_questions': len(questions),
+            'current_category': category.type
+        })
 
     '''
     @TODO: 
@@ -252,7 +273,5 @@ def create_app(test_config=None):
         return jsonify({'status': 'error',
                         'message': f'{error}',
                         'error': 405}), 405
-
-    return app
 
     return app
